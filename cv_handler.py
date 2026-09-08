@@ -55,14 +55,14 @@ class Watermarker:
                         'right': self.right_logo}
         self.position_multiplier = {
             "center": (0.5, 0.5),
-            "bottom center": (0.5, 0.75),
-            "top center": (0.5, 0.25),
+            "bottom_center": (0.5, 0.75),
+            "top_center": (0.5, 0.25),
             "left": (0.25, 0.5),
-            "top left": (0.25, 0.25),
-            "bottom left": (0.25, 0.75),
+            "top_left": (0.25, 0.25),
+            "bottom_left": (0.25, 0.75),
             "right": (0.75, 0.5),
-            "top right": (0.25, 0.75),
-            "bottom right": (0.75, 0.75),
+            "top_right": (0.25, 0.75),
+            "bottom_right": (0.75, 0.75),
         }
 
     def update_dimensions(self):
@@ -332,6 +332,23 @@ class Watermarker:
         self.update_dimensions()
         self.center_x = int(self.img_width * 0.25)
         self.center_y = int(self.img_height * 0.75)
+        self.calculate_destination()
+
+    def set_logo_position(self, position, **kwargs):
+        """Sets the logo position based on the string provided. Returns nothing."""
+        if position in self.position_multiplier:
+            x_multiplier = self.position_multiplier[position][0]
+            y_multiplier = self.position_multiplier[position][1]
+        else:
+            raise ValueError(f"Invalid position: {position}. Valid positions are: {list(self.pos_fns.keys())}")
+        if kwargs.get('original'):
+            self.original_center_x = int(self.original_width * x_multiplier)
+            self.original_center_y = int(self.original_height * y_multiplier)
+            self.calculate_destination(original=True)
+            return
+        self.update_dimensions()
+        self.center_x = int(self.img_width * x_multiplier)
+        self.center_y = int(self.img_height * y_multiplier)
         self.calculate_destination()
 
     # center coords: (x = 0.5, y = 0.5)

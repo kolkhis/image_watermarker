@@ -53,6 +53,17 @@ class Watermarker:
                         'bottom_center': self.center_bottom_logo,
                         'left': self.left_logo,
                         'right': self.right_logo}
+        self.position_multiplier = {
+            "center": (0.5, 0.5),
+            "bottom center": (0.5, 0.75),
+            "top center": (0.5, 0.25),
+            "left": (0.25, 0.5),
+            "top left": (0.25, 0.25),
+            "bottom left": (0.25, 0.75),
+            "right": (0.75, 0.5),
+            "top right": (0.25, 0.75),
+            "bottom right": (0.75, 0.75),
+        }
 
     def update_dimensions(self):
         """Reset img_height, img_width (if an image exists), and logo_height, logo_width (if a logo exists)"""
@@ -323,7 +334,6 @@ class Watermarker:
         self.center_y = int(self.img_height * 0.75)
         self.calculate_destination()
 
-
     # center coords: (x = 0.5, y = 0.5)
     # center bottom coords: (x = 0.5, y = 0.75)
     # center top coords: (x = 0.5, y = 0.25)
@@ -333,3 +343,4 @@ class Watermarker:
     # top right coords: (x = 0.25, y = 0.75)
     # bottom right coords: (x = 0.75, y = 0.75)
     # bottom left coords: (x = 0.25, y = 0.75)
+

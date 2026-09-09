@@ -61,7 +61,7 @@ class Watermarker:
             "top_left": (0.25, 0.25),
             "bottom_left": (0.25, 0.75),
             "right": (0.75, 0.5),
-            "top_right": (0.25, 0.75),
+            "top_right": (0.75, 0.25),
             "bottom_right": (0.75, 0.75),
         }
 

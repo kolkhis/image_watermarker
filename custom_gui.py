@@ -219,7 +219,11 @@ class Root(ctk.CTk):
         file_type = self.initial_filename.split(".")[-1]
         file_name = f'watermarked_{self.initial_filename}'
         types = [( f'.{file_type}' , f'*.{file_type}'), ('All Files', '*.*')]
-        loc = filedialog.asksaveasfile(filetypes=types, defaultextension=types[0], initialfile=file_name)
+        loc = filedialog.asksaveasfilename(
+            filetypes = types,
+            defaultextension=f".{file_type}",
+            initialfile=file_name,
+        )
         if loc == '':
             return  # Catch if user clicks Cancel
         txt = None if self.watermark_text.get() == '' else self.watermark_text.get()

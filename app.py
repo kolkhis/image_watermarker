@@ -173,8 +173,6 @@ class Root(tk.Tk):
         print(f'Text fetched: {txt}')
         self.watermarker.refresh_array()
         if self.logo is not None:
-            # position_fn = self.watermarker.pos_fns[self.logo_position.get()]
-            # position_fn()
             self.watermarker.set_logo_position(self.logo_position.get())
         if self.img is not None:
             txt_pos = self.watermarker.get_txt_pos(self.logo_position.get())
@@ -209,15 +207,13 @@ class Root(tk.Tk):
 
     def save_pic(self):
         """Saves pic from original (not resized, as with the display)"""
-        loc = filedialog.asksaveasfile()
+        loc = filedialog.asksaveasfilename()
         if loc == '':
             return  # Catch if user clicks Cancel
         txt = None if self.text.get() == '' else self.text.get()
         print(f'Text fetched: {txt}')
         if self.logo is not None:
             self.watermarker.format_original_for_writing()
-            # position_fn = self.watermarker.pos_fns[self.logo_position.get()]
-            # position_fn(original=True)
             self.watermarker.set_logo_position(self.logo_position.get(), original=True)
         txt_pos = self.watermarker.get_txt_pos(self.logo_position.get(), original=True)
         text_size = self.text_size_slider.get()

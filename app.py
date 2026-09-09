@@ -173,8 +173,9 @@ class Root(tk.Tk):
         print(f'Text fetched: {txt}')
         self.watermarker.refresh_array()
         if self.logo is not None:
-            position_fn = self.watermarker.pos_fns[self.logo_position.get()]
-            position_fn()
+            # position_fn = self.watermarker.pos_fns[self.logo_position.get()]
+            # position_fn()
+            self.watermarker.set_logo_position(self.logo_position.get())
         if self.img is not None:
             txt_pos = self.watermarker.get_txt_pos(self.logo_position.get())
             text_size = self.text_size_slider.get()
@@ -215,8 +216,9 @@ class Root(tk.Tk):
         print(f'Text fetched: {txt}')
         if self.logo is not None:
             self.watermarker.format_original_for_writing()
-            position_fn = self.watermarker.pos_fns[self.logo_position.get()]
-            position_fn(original=True)
+            # position_fn = self.watermarker.pos_fns[self.logo_position.get()]
+            # position_fn(original=True)
+            self.watermarker.set_logo_position(self.logo_position.get(), original=True)
         txt_pos = self.watermarker.get_txt_pos(self.logo_position.get(), original=True)
         text_size = self.text_size_slider.get()
         text_thickness = self.text_thickness_slider.get()

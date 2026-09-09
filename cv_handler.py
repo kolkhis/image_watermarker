@@ -244,7 +244,7 @@ class Watermarker:
             x_multiplier = self.position_multiplier[position][0]
             y_multiplier = self.position_multiplier[position][1]
         else:
-            raise ValueError(f"Invalid position: {position}. Valid positions are: {list(self.pos_fns.keys())}")
+            raise ValueError(f"Invalid position: {position}. Valid positions are: {list(self.position_multiplier.keys())}")
         if kwargs.get('original'):
             self.original_center_x = int(self.original_width * x_multiplier)
             self.original_center_y = int(self.original_height * y_multiplier)

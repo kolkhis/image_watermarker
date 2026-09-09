@@ -44,15 +44,15 @@ class Watermarker:
             self.right_x = self.left_x + self.logo_width
         else:
             self.logo, self.original_logo = None, None
-        self.pos_fns = {'top_right': self.top_right_logo,
-                        'top_left': self.top_left_logo,
-                        'top_center': self.center_top_logo,
-                        'center': self.center_logo,
-                        'bottom_right': self.bottom_right_logo,
-                        'bottom_left': self.bottom_left_logo,
-                        'bottom_center': self.center_bottom_logo,
-                        'left': self.left_logo,
-                        'right': self.right_logo}
+        # self.pos_fns = {'top_right': self.top_right_logo,
+        #                 'top_left': self.top_left_logo,
+        #                 'top_center': self.center_top_logo,
+        #                 'center': self.center_logo,
+        #                 'bottom_right': self.bottom_right_logo,
+        #                 'bottom_left': self.bottom_left_logo,
+        #                 'bottom_center': self.center_bottom_logo,
+        #                 'left': self.left_logo,
+        #                 'right': self.right_logo}
         self.position_multiplier = {
             "center": (0.5, 0.5),
             "bottom_center": (0.5, 0.75),

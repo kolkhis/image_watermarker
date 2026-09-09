@@ -225,6 +225,36 @@ class Watermarker:
         if self.logo is not None:
             self.logo = self.working_logo.copy()
 
+    # TODO(refactor): Use only this method for setting logo positions,
+    # deprecate all other logo setting methods.  
+    def set_logo_position(self, position, **kwargs):
+        """Sets the logo position based on the string provided. Returns nothing.
+        Position must be one of:
+          - "center"
+          - "bottom_center"
+          - "top_center"
+          - "left"
+          - "top_left"
+          - "bottom_left"
+          - "right"
+          - "top_right"
+          - "bottom_right"
+        """
+        if position in self.position_multiplier:
+            x_multiplier = self.position_multiplier[position][0]
+            y_multiplier = self.position_multiplier[position][1]
+        else:
+            raise ValueError(f"Invalid position: {position}. Valid positions are: {list(self.pos_fns.keys())}")
+        if kwargs.get('original'):
+            self.original_center_x = int(self.original_width * x_multiplier)
+            self.original_center_y = int(self.original_height * y_multiplier)
+            self.calculate_destination(original=True)
+            return
+        self.update_dimensions()
+        self.center_x = int(self.img_width * x_multiplier)
+        self.center_y = int(self.img_height * y_multiplier)
+        self.calculate_destination()
+
     def center_logo(self, **kwargs):
         """Situates coordinates for the logo to appear at the center of the parent image. Returns nothing."""
         if kwargs.get('original'):
@@ -333,31 +363,4 @@ class Watermarker:
         self.center_x = int(self.img_width * 0.25)
         self.center_y = int(self.img_height * 0.75)
         self.calculate_destination()
-
-    def set_logo_position(self, position, **kwargs):
-        """Sets the logo position based on the string provided. Returns nothing."""
-        if position in self.position_multiplier:
-            x_multiplier = self.position_multiplier[position][0]
-            y_multiplier = self.position_multiplier[position][1]
-        else:
-            raise ValueError(f"Invalid position: {position}. Valid positions are: {list(self.pos_fns.keys())}")
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * x_multiplier)
-            self.original_center_y = int(self.original_height * y_multiplier)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * x_multiplier)
-        self.center_y = int(self.img_height * y_multiplier)
-        self.calculate_destination()
-
-    # center coords: (x = 0.5, y = 0.5)
-    # center bottom coords: (x = 0.5, y = 0.75)
-    # center top coords: (x = 0.5, y = 0.25)
-    # left coords: (x = 0.25, y = 0.5)
-    # top left coords: (x = 0.25, y = 0.25)
-    # right coords: (x = 0.75, y = 0.5)
-    # top right coords: (x = 0.25, y = 0.75)
-    # bottom right coords: (x = 0.75, y = 0.75)
-    # bottom left coords: (x = 0.25, y = 0.75)
 

@@ -13,7 +13,7 @@ FG_COLOR = '#F4EEE0'
 class Root(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title('Image Watermarker, cuz who rly wants to buy Photoshop?')
+        self.title('Image Watermarker by Kolkhis')
         self.style = ttk.Style(self)
         self.style.theme_use('clam')
 

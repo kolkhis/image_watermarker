@@ -17,7 +17,7 @@ BG_COLOR = '#454545'
 class Root(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title('Image Watermarker Application')
+        self.title('Image Watermarker by Kolkhis')
 
         # Initialize attributes
         self.img = None

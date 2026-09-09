@@ -17,7 +17,7 @@ BG_COLOR = '#454545'
 class Root(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title('Image Watermarker, cuz who rly wants to buy Photoshop?')
+        self.title('Image Watermarker by Kolkhis')
 
         # Initialize attributes
         self.img = None
@@ -177,8 +177,7 @@ class Root(ctk.CTk):
         txt = None if self.watermark_text.get() == '' else self.watermark_text.get()
         self.watermarker.refresh_array()
         if self.logo is not None:
-            position_fn = self.watermarker.pos_fns[self.logo_position.get()]
-            position_fn()
+            self.watermarker.set_logo_position(self.logo_position.get())
         if self.img is not None:
             txt_pos = self.watermarker.get_txt_pos(self.logo_position.get())
             text_size = self.text_size_slider.get()
@@ -214,17 +213,20 @@ class Root(ctk.CTk):
         self.canvas_image = self.canvas.create_image(placement, image=self.img)
 
     def save_pic(self):
-        """Saves pic from original (not resized, as with the display)"""
+        """Saves picture from original (not resized, as with the display)"""
         file_type = self.initial_filename.split(".")[-1]
         file_name = f'watermarked_{self.initial_filename}'
         types = [( f'.{file_type}' , f'*.{file_type}'), ('All Files', '*.*')]
-        loc = filedialog.asksaveasfile(filetypes=types, defaultextension=types[0], initialfile=file_name)
+        loc = filedialog.asksaveasfilename(
+            filetypes = types,
+            defaultextension=f".{file_type}",
+            initialfile=file_name,
+        )
         if loc == '':
             return  # Catch if user clicks Cancel
         txt = None if self.watermark_text.get() == '' else self.watermark_text.get()
         if self.logo is not None:
-            position_fn = self.watermarker.pos_fns[self.logo_position.get()]
-            position_fn(original=True)
+            self.watermarker.set_logo_position(self.logo_position.get(), original=True)
         txt_pos = self.watermarker.get_txt_pos(self.logo_position.get(), original=True)
         text_size = self.text_size_slider.get()
         text_thickness = self.text_thickness_slider.get()

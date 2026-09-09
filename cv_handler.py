@@ -44,15 +44,7 @@ class Watermarker:
             self.right_x = self.left_x + self.logo_width
         else:
             self.logo, self.original_logo = None, None
-        # self.pos_fns = {'top_right': self.top_right_logo,
-        #                 'top_left': self.top_left_logo,
-        #                 'top_center': self.center_top_logo,
-        #                 'center': self.center_logo,
-        #                 'bottom_right': self.bottom_right_logo,
-        #                 'bottom_left': self.bottom_left_logo,
-        #                 'bottom_center': self.center_bottom_logo,
-        #                 'left': self.left_logo,
-        #                 'right': self.right_logo}
+
         self.position_multiplier = {
             "center": (0.5, 0.5),
             "bottom_center": (0.5, 0.75),
@@ -225,8 +217,6 @@ class Watermarker:
         if self.logo is not None:
             self.logo = self.working_logo.copy()
 
-    # TODO(refactor): Use only this method for setting logo positions,
-    # deprecate all other logo setting methods.  
     def set_logo_position(self, position, **kwargs):
         """Sets the logo position based on the string provided. Returns nothing.
         Position must be one of:
@@ -253,114 +243,5 @@ class Watermarker:
         self.update_dimensions()
         self.center_x = int(self.img_width * x_multiplier)
         self.center_y = int(self.img_height * y_multiplier)
-        self.calculate_destination()
-
-    def center_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the center of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * 0.5)
-            self.original_center_y = int(self.original_height * 0.5)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * 0.5)
-        self.center_y = int(self.img_height * 0.5)
-        self.calculate_destination()
-
-    def center_bottom_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the center of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * 0.5)
-            self.original_center_y = int(self.original_height * 0.75)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * 0.5)
-        self.center_y = int(self.img_height * 0.75)
-        self.calculate_destination()
-
-    def center_top_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the center of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * 0.5)
-            self.original_center_y = int(self.original_height * 0.25)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * 0.5)
-        self.center_y = int(self.img_height * 0.25)
-        self.calculate_destination()
-
-    def left_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the center left of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * 0.25)
-            self.original_center_y = int(self.original_height * 0.5)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_y = int(self.img_height * 0.5)
-        self.center_x = int(self.img_width * 0.25)
-        self.calculate_destination()
-
-    def top_left_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the top left of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_height
-            self.original_center_x = int(self.original_width * 0.25)
-            self.original_center_y = int(self.original_height * 0.25)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * 0.25)
-        self.center_y = int(self.img_height * 0.25)
-        self.calculate_destination()
-
-    def right_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the top right of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * 0.75)
-            self.original_center_y = int(self.original_height * 0.5)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * 0.75)
-        self.center_y = int(self.img_height * 0.5)
-        self.calculate_destination()
-
-    def top_right_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the top right of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * 0.75)
-            self.original_center_y = int(self.original_height * 0.25)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * 0.75)
-        self.center_y = int(self.img_height * 0.25)
-        self.calculate_destination()
-
-    def bottom_right_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the bottom right of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * 0.75)
-            self.original_center_y = int(self.original_height * 0.75)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * 0.75)
-        self.center_y = int(self.img_height * 0.75)
-        self.calculate_destination()
-
-    def bottom_left_logo(self, **kwargs):
-        """Situates coordinates for the logo to appear at the bottom left of the parent image. Returns nothing."""
-        if kwargs.get('original'):
-            self.original_center_x = int(self.original_width * 0.25)
-            self.original_center_y = int(self.original_height * 0.75)
-            self.calculate_destination(original=True)
-            return
-        self.update_dimensions()
-        self.center_x = int(self.img_width * 0.25)
-        self.center_y = int(self.img_height * 0.75)
         self.calculate_destination()
 

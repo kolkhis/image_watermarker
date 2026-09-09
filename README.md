@@ -54,7 +54,7 @@ python3 ./main.py
 * Images resize to fit in the GUI, but are saved as their original size.
 
 ### Using Tkinter instead of CustomTkinter:
-Uncomment the import from `app.py` and comment the import from `custom_gui.py`:
+Uncomment the import from `basic_gui.py` and comment the import from `custom_gui.py`:
 > ![Use Tkinter Instead of CustomTkinter](https://github.com/Kolkhis/image_watermarker/assets/36500473/42f20e90-b1f3-4060-b2c0-1b8427ff2434)
 
 ### Font Colors

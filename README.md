@@ -11,8 +11,37 @@
 
 May look different on your PC. Application theme follows your system theme.
 
-To use, navigate to the project directory and run: 
-`pip install -r requirements.txt`
+## Usage
+To use, ensure Python is installed and navigate to the project directory.
+
+**Recommended**: Create a virtual environment first.
+```bash
+# Windows:
+python -m venv venv
+# Linux:
+python3 -m venv venv
+```
+
+Then, activate the virtual environment.  
+```bash
+# Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
+# Linux:
+./venv/bin/activate
+```
+
+Once the virtual environment is activated, install the required dependencies.
+```bash
+pip install -r requirements.txt
+```
+
+Finally, run the program.
+```bash
+# Windows:
+python .\main.py
+# Linux:
+python3 ./main.py
+```
 
 ## Features
 * Uses `opencv-python` to manipulate images.
